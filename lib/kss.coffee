@@ -11,12 +11,13 @@ class KssStateGenerator
   constructor: ->
     hover = /:hover/
     disabled = /:disabled/
+    active = /:active/
 
     try
       for stylesheet in document.styleSheets
         idxs = []
         for rule, idx in stylesheet.cssRules
-          if rule.type is CSSRule.STYLE_RULE and (hover.test(rule.selectorText) or disabled.test(rule.selectorText))
+          if rule.type is CSSRule.STYLE_RULE and (hover.test(rule.selectorText) or disabled.test(rule.selectorText) or active.test(rule.selectorText))
             @insertRule(rule.cssText.replace(':', '.pseudo-class-'))
 
   # Takes a given style and attaches it to the current page.
